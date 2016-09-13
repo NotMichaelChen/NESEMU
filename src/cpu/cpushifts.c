@@ -53,7 +53,7 @@ void ASL(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x1E:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }
@@ -116,7 +116,7 @@ void LSR(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x5E:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }
@@ -181,7 +181,7 @@ void ROL(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x3E:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }
@@ -248,7 +248,7 @@ void ROR(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x7E:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }

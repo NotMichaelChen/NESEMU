@@ -18,9 +18,6 @@
 
 #include "cpuinternal.h"
 
-//TODO: address page crossing affecting cpu cycle count
-//NOTE: page crossing refers to when there is a carry when adding a register to an address
-
 struct registers reg;
 
 void powerOn()

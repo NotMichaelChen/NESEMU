@@ -37,6 +37,7 @@ unsigned short mode_zeropage_Y(unsigned short* PC, unsigned char Y)
 //(this is because PC is a short while result is a char)
 char mode_relative(unsigned short* PC)
 {
+    //Page crossing handled by calling function
     char result = readPRGROM(*PC+1);
     *PC += 2;
     return result;
@@ -49,17 +50,25 @@ unsigned short mode_absolute(unsigned short* PC)
     return address;
 }
 
-unsigned short mode_absolute_X(unsigned short* PC, unsigned char X)
+unsigned short mode_absolute_X(unsigned short* PC, int* cpucycles, unsigned char X)
 {
-    unsigned short address = (readPRGROM(*PC+2) << 8) + readPRGROM(*PC+1) + X;
+    unsigned char upper = readPRGROM(*PC+2);
+    unsigned short address = (upper << 8) + readPRGROM(*PC+1) + X;
     *PC += 3;
+    //Page crossing
+    if(address >> 0b1000 != upper)
+        *cpucycles += 1;
     return address;
 }
 
-unsigned short mode_absolute_Y(unsigned short* PC, unsigned char Y)
+unsigned short mode_absolute_Y(unsigned short* PC, int* cpucycles, unsigned char Y)
 {
-    unsigned short address = (readPRGROM(*PC+2) << 8) + readPRGROM(*PC+1) + Y;
+    unsigned char upper = readPRGROM(*PC+2);
+    unsigned short address = (upper << 8) + readPRGROM(*PC+1) + Y;
     *PC += 3;
+    //Page crossing
+    if(address >> 0b1000 != upper)
+        *cpucycles += 1;
     return address;
 }
 
@@ -71,6 +80,7 @@ unsigned short mode_indirect(unsigned short* PC)
     return address;
 }
 
+//Indirect X
 unsigned short mode_indexed_indirect(unsigned short* PC, unsigned char X)
 {
     unsigned short ramaddress = readPRGROM(*PC+1) + X;
@@ -79,10 +89,15 @@ unsigned short mode_indexed_indirect(unsigned short* PC, unsigned char X)
     return address;
 }
 
-unsigned short mode_indirect_indexed(unsigned short* PC, unsigned char Y)
+//Indirect Y
+unsigned short mode_indirect_indexed(unsigned short* PC, int* cpucycles, unsigned char Y)
 {
     unsigned short ramaddress = readPRGROM(*PC+1);
-    unsigned short address = (readRAM(ramaddress+2) << 8) + readRAM(ramaddress+1) + Y;
+    unsigned char upper = readRAM(ramaddress+2);
+    unsigned short address = (upper << 8) + readRAM(ramaddress+1) + Y;
+    //Page crossing
+    if(address >> 0b1000 != upper)
+        *cpucycles += 1;
     *PC += 2;
     return address;
 }

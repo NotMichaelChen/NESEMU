@@ -33,7 +33,7 @@ void INC(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0xFE:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }
@@ -98,7 +98,7 @@ void DEC(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0xDE:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 7;
         break;
     }

@@ -47,7 +47,7 @@ void cpu_arithmetic(unsigned char opcode, int* cpucycles, struct registers* reg)
     case 0xFD:
         isSubtract = true;
     case 0x7D:
-        constant = readRAM(mode_absolute_X(&(reg->PC), reg->X));
+        constant = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
@@ -55,7 +55,7 @@ void cpu_arithmetic(unsigned char opcode, int* cpucycles, struct registers* reg)
     case 0xF9:
         isSubtract = true;
     case 0x79:
-        constant = readRAM(mode_absolute_Y(&(reg->PC), reg->Y));
+        constant = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
@@ -71,7 +71,7 @@ void cpu_arithmetic(unsigned char opcode, int* cpucycles, struct registers* reg)
     case 0xF1:
         isSubtract = true;
     case 0x71:
-        constant = readRAM(mode_indirect_indexed(&(reg->PC), reg->Y));
+        constant = readRAM(mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }
@@ -133,13 +133,13 @@ void CMP(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0xDD:
-        constant = readRAM(mode_absolute_X(&(reg->PC), reg->X));
+        constant = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
     //Absolute,Y
     case 0xD9:
-        constant = readRAM(mode_absolute_Y(&(reg->PC), reg->Y));
+        constant = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
@@ -151,7 +151,7 @@ void CMP(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Indirect Y
     case 0xD1:
-        constant = readRAM(mode_indirect_indexed(&(reg->PC), reg->Y));
+        constant = readRAM(mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }

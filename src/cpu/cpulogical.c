@@ -38,13 +38,13 @@ void AND(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x3D:
-        constant = readRAM(mode_absolute_X(&(reg->PC), reg->X));
+        constant = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
     //Absolute,Y
     case 0x39:
-        constant = readRAM(mode_absolute_Y(&(reg->PC), reg->Y));
+        constant = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
@@ -56,7 +56,7 @@ void AND(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Indirect Y
     case 0x31:
-        constant = readRAM(mode_indirect_indexed(&reg->PC, reg->Y));
+        constant = readRAM(mode_indirect_indexed(&reg->PC, cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }
@@ -101,13 +101,13 @@ void EOR(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x5D:
-        constant = readRAM(mode_absolute_X(&(reg->PC), reg->X));
+        constant = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
     //Absolute,Y
     case 0x59:
-        constant = readRAM(mode_absolute_Y(&(reg->PC), reg->Y));
+        constant = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
@@ -119,7 +119,7 @@ void EOR(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Indirect Y
     case 0x51:
-        constant = readRAM(mode_indirect_indexed(&reg->PC, reg->Y));
+        constant = readRAM(mode_indirect_indexed(&reg->PC, cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }
@@ -164,13 +164,13 @@ void ORA(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Absolute,X
     case 0x1D:
-        constant = readRAM(mode_absolute_X(&(reg->PC), reg->X));
+        constant = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
     //Absolute,Y
     case 0x19:
-        constant = readRAM(mode_absolute_Y(&(reg->PC), reg->Y));
+        constant = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
@@ -182,7 +182,7 @@ void ORA(unsigned char opcode, int* cpucycles, struct registers* reg)
 
     //Indirect Y
     case 0x11:
-        constant = readRAM(mode_indirect_indexed(&reg->PC, reg->Y));
+        constant = readRAM(mode_indirect_indexed(&reg->PC, cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }

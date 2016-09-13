@@ -3,11 +3,12 @@
 #include "Memory/addressing-modes.h"
 #include "cpuinternal.h"
 
+//TODO: Address page crossing when using indirect addressing
+
 //Contains function for all branch-related cpu opcodes
 
 void cpu_branch(unsigned char opcode, int* cpucycles, struct registers* reg)
 {
-    //TODO: make cpucycles more correct
     *cpucycles += 2;
 
     bool condition;

@@ -32,12 +32,12 @@ void LDA(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xBD:
-        reg->A = mode_absolute_X(&(reg->PC), reg->X);
+        reg->A = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 4;
         break;
 
     case 0xB9:
-        reg->A = mode_absolute_Y(&(reg->PC), reg->Y);
+        reg->A = mode_absolute_Y(&(reg->PC), cpucycles, reg->Y);
         *cpucycles += 4;
         break;
 
@@ -47,7 +47,7 @@ void LDA(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xB1:
-        reg->A = mode_indirect_indexed(&(reg->PC), reg->Y);
+        reg->A = mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y);
         *cpucycles += 5;
         break;
     }
@@ -83,7 +83,7 @@ void LDX(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xBE:
-        reg->X = mode_absolute_Y(&(reg->PC), reg->Y);
+        reg->X = mode_absolute_Y(&(reg->PC), cpucycles, reg->Y);
         *cpucycles += 4;
         break;
     }
@@ -119,7 +119,7 @@ void LDY(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xBC:
-        reg->Y = mode_absolute_X(&(reg->PC), reg->X);
+        reg->Y = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 4;
         break;
     }
@@ -152,12 +152,12 @@ void STA(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0x9D:
-        address = mode_absolute_X(&(reg->PC), reg->X);
+        address = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 5;
         break;
 
     case 0x99:
-        address = mode_absolute_Y(&(reg->PC), reg->X);
+        address = mode_absolute_Y(&(reg->PC), cpucycles, reg->X);
         *cpucycles += 5;
         break;
 
@@ -167,7 +167,7 @@ void STA(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0x91:
-        address = mode_indirect_indexed(&(reg->PC), reg->Y);
+        address = mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y);
         *cpucycles += 6;
         break;
     }
