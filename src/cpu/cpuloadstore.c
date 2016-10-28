@@ -17,37 +17,37 @@ void LDA(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xA5:
-        reg->A = mode_zeropage(&(reg->PC));
+        reg->A = readRAM(mode_zeropage(&(reg->PC)));
         *cpucycles += 3;
         break;
 
     case 0xB5:
-        reg->A = mode_zeropage_X(&(reg->PC), reg->X);
+        reg->A = readRAM(mode_zeropage_X(&(reg->PC), reg->X));
         *cpucycles += 4;
         break;
 
     case 0xAD:
-        reg->A = mode_absolute(&(reg->PC));
+        reg->A = readRAM(mode_absolute(&(reg->PC)));
         *cpucycles += 4;
         break;
 
     case 0xBD:
-        reg->A = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
+        reg->A = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
 
     case 0xB9:
-        reg->A = mode_absolute_Y(&(reg->PC), cpucycles, reg->Y);
+        reg->A = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
 
     case 0xA1:
-        reg->A = mode_indexed_indirect(&(reg->PC), reg->X);
+        reg->A = readRAM(mode_indexed_indirect(&(reg->PC), reg->X));
         *cpucycles += 6;
         break;
 
     case 0xB1:
-        reg->A = mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y);
+        reg->A = readRAM(mode_indirect_indexed(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 5;
         break;
     }
@@ -68,22 +68,22 @@ void LDX(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xA6:
-        reg->X = mode_zeropage(&(reg->PC));
+        reg->X = readRAM(mode_zeropage(&(reg->PC)));
         *cpucycles += 3;
         break;
 
     case 0xB6:
-        reg->X = mode_zeropage_Y(&(reg->PC), reg->Y);
+        reg->X = readRAM(mode_zeropage_Y(&(reg->PC), reg->Y));
         *cpucycles += 4;
         break;
 
     case 0xAE:
-        reg->X = mode_absolute(&(reg->PC));
+        reg->X = readRAM(mode_absolute(&(reg->PC)));
         *cpucycles += 4;
         break;
 
     case 0xBE:
-        reg->X = mode_absolute_Y(&(reg->PC), cpucycles, reg->Y);
+        reg->X = readRAM(mode_absolute_Y(&(reg->PC), cpucycles, reg->Y));
         *cpucycles += 4;
         break;
     }
@@ -104,22 +104,22 @@ void LDY(unsigned char opcode, int* cpucycles, struct registers* reg)
         break;
 
     case 0xA4:
-        reg->Y = mode_zeropage(&(reg->PC));
+        reg->Y = readRAM(mode_zeropage(&(reg->PC)));
         *cpucycles += 3;
         break;
 
     case 0xB4:
-        reg->Y = mode_zeropage_X(&(reg->PC), reg->X);
+        reg->Y = readRAM(mode_zeropage_X(&(reg->PC), reg->X));
         *cpucycles += 4;
         break;
 
     case 0xAC:
-        reg->Y = mode_absolute(&(reg->PC));
+        reg->Y = readRAM(mode_absolute(&(reg->PC)));
         *cpucycles += 4;
         break;
 
     case 0xBC:
-        reg->Y = mode_absolute_X(&(reg->PC), cpucycles, reg->X);
+        reg->Y = readRAM(mode_absolute_X(&(reg->PC), cpucycles, reg->X));
         *cpucycles += 4;
         break;
     }
