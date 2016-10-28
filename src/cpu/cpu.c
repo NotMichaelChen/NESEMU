@@ -4,6 +4,8 @@
 #include "Memory/memory.h"
 #include "Memory/addressing-modes.h"
 
+#include "ppu/ppu.h"
+
 #include "cpuloadstore.h"
 #include "cpuregtrans.h"
 #include "cpustack.h"
@@ -22,6 +24,7 @@ struct registers reg;
 
 void powerOn()
 {
+    //initialize CPU registers
     reg.C = false;
     reg.Z = false;
     reg.I = true;
@@ -33,6 +36,9 @@ void powerOn()
     reg.A = reg.X = reg.Y = 0;
     reg.SP = 0xFF;
     reg.PC = 0;
+
+    //initialize the PPU
+    ppu_init();
 }
 
 int executeROM()

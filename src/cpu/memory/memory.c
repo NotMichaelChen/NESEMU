@@ -128,3 +128,9 @@ unsigned char stack_pop(unsigned char* SP)
 {
     return Stack[++(*SP)];
 }
+
+//Only needed to allow ppu.c to set up its registers
+unsigned char* getPPUregisters()
+{
+    return PPUregisters;
+}
